@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const DB = require('./conn/connection');
+const routes = require('./routes/routes');
+const {authMiddleWare} = require("./controllers/AuthController");
 require('dotenv').config();
 
 const PORT = process.env.PORT || 5001;
@@ -18,9 +20,8 @@ app.use((req, res, next) => {
 })
 
 
-app.use("/", (req, res) => {
-    res.json({message: "working"});
-})
+app.use('/taskmate', routes);
+app.use(authMiddleWare);
 
 app.use(cors());
 

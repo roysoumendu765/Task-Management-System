@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
-const { LoginUser } = require('./AuthModel');
 
 const TaskSchema = new mongoose.Schema({
+    taskId: {
+        type: mongoose.Schema.Types.ObjectId, 
+        default: mongoose.Types.ObjectId,  
+    },
     title: {
         type: String,
         required: true,
@@ -25,20 +28,12 @@ const TaskSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    totalTimeToFinish: {
-        type: Number,
-        default: function () {
-            if (this.startTime && this.endTime) {
-                return (this.endTime - this.startTime) / (1000 * 60 * 60);
-            }
-            return 0;
-        },
-    },
     username: {
         type: String,
         required: true,
-        ref: 'LoginUser',
     }
 });
 
-const UserTask = mongoose.Model("userTask", TaskSchema);
+const UserTask = mongoose.model("userTask", TaskSchema);
+
+module.exports = {UserTask};
