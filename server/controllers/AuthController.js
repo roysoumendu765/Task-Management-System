@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const registerUser = async(req, res) => {
     const {username, password, confirmpassword} = req.body;
+    console.log(req.body);
 
     if(!username || !password || !confirmpassword){
         return res.status(400).json({message: "Please provide all the required fields."});
@@ -28,7 +29,7 @@ const registerUser = async(req, res) => {
 
     try {
         await addUser.save();
-        res.status(201).json({message: 'User Registration Successful.'});
+        res.status(200).json({message: 'User Registration Successful.'});
     } catch (error) {
         res.status(500).json({message: 'Server error', error});
     }
@@ -53,12 +54,12 @@ const loginUser = async(req, res) => {
 
     const token = jwt.sign({userId: loggedUser._id, username: loggedUser.username}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
-    res.json({message: 'Login Successful', token});
+    res.status(200).json({message: 'Login Successful', token});
 }
 
 const authMiddleWare = async (req, res, next) => {
     const token = req.header('Authorization') && req.header('Authorization').split(' ')[1];
-    
+
     if(!token){
         return res.status(401).json({message: 'Authorization Denied'})
     }

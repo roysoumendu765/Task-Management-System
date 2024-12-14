@@ -5,6 +5,7 @@ const DB = require('./conn/connection');
 const routes = require('./routes/routes');
 const {authMiddleWare} = require("./controllers/AuthController");
 require('dotenv').config();
+// DB();
 
 const PORT = process.env.PORT || 5001;
 const app = express();
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
 
 
 app.use('/taskmate', routes);
-app.use(authMiddleWare);
+// app.use(authMiddleWare);
 
 app.use(cors());
 
