@@ -29,6 +29,7 @@ const Auth: React.FC = () => {
 
       if(response.status === 200){
         localStorage.setItem("token", response.data.message);
+        localStorage.setItem("useremail", username);
         navigate('/dashboard', { state: username}) 
         console.log("Login Successful");       
       }

@@ -9,13 +9,13 @@ import TaskList from './components/TaskList/TaskList';
 import Auth from './components/Auth/Auth';
 
 interface ProtectedRouteProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const App: React.FC = () => {
   const ProtectedRoute = ({children} : ProtectedRouteProps) => {
     const token = localStorage.getItem("token");
-    return token ? children : <Navigate to="/" />
+    return token ? <>{children}</> : <Navigate to="/" />
   }
 
   return (
