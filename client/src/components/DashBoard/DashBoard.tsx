@@ -16,7 +16,7 @@ const Dashboard: React.FC = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/taskmate/getdashdata/${username}`);
+        const response = await axios.get(`https://task-management-app-backend-8814.onrender.com/taskmate/getdashdata/${username}`);
 
         if (response.status === 200) {
           console.log(response.data);
@@ -39,19 +39,19 @@ const Dashboard: React.FC = () => {
           <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
           <div className="grid grid-cols-4 gap-4">
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h3 className="text-xl font-bold text-blue-500">{dashboardData.totTasks}</h3>
+              <h3 className="text-xl font-bold text-blue-500">{dashboardData.totTasks ? dashboardData.totTasks : 0}</h3>
               <p className="text-gray-600">Total tasks</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h3 className="text-xl font-bold text-blue-500">{dashboardData.completedPercent}%</h3>
+              <h3 className="text-xl font-bold text-blue-500">{dashboardData.completedPercent ? dashboardData.completedPercent : 0}%</h3>
               <p className="text-gray-600">Tasks completed</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h3 className="text-xl font-bold text-blue-500">{dashboardData.pendingPercent}%</h3>
+              <h3 className="text-xl font-bold text-blue-500">{dashboardData.pendingPercent ? dashboardData.pendingPercent : 0}%</h3>
               <p className="text-gray-600">Tasks pending</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h3 className="text-xl font-bold text-blue-500">{dashboardData.AverageTime} hrs</h3>
+              <h3 className="text-xl font-bold text-blue-500">{dashboardData.AverageTime ? dashboardData.AverageTime : 0} hrs</h3>
               <p className="text-gray-600">Average time per completed task</p>
             </div>
           </div>
@@ -61,15 +61,15 @@ const Dashboard: React.FC = () => {
           <h3 className="text-xl font-bold mb-4">Pending task summary</h3>
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h4 className="text-lg font-bold text-blue-500">{dashboardData.pendingTasks}</h4>
+              <h4 className="text-lg font-bold text-blue-500">{dashboardData.pendingTasks ? dashboardData.pendingTasks : 0}</h4>
               <p className="text-gray-600">Pending tasks</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h4 className="text-lg font-bold text-blue-500">{dashboardData.TimeLapsed} hrs</h4>
+              <h4 className="text-lg font-bold text-blue-500">{dashboardData.TimeLapsed ? dashboardData.TimeLapsed : 0} hrs</h4>
               <p className="text-gray-600">Total time lapsed</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h4 className="text-lg font-bold text-blue-500">{dashboardData.TimeLeft} hrs</h4>
+              <h4 className="text-lg font-bold text-blue-500">{dashboardData.TimeLeft ? dashboardData.TimeLeft : 0} hrs</h4>
               <p className="text-gray-600">Total time to finish</p>
               <p className="text-sm text-gray-500">estimated based on end time</p>
             </div>
@@ -89,12 +89,13 @@ const Dashboard: React.FC = () => {
                 <tr key={task.priority} className="odd:bg-white even:bg-gray-50">
                   <td className="border border-gray-300 px-4 py-2 text-center">{task.priority}</td>
                   <td className="border border-gray-300 px-4 py-2 text-center">{task.count}</td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">{task.timeElapsedSum}</td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">{task.timeLeftSum}</td>
+                  <td className="border border-gray-300 px-4 py-2 text-center">{task.timeElapsedSum > 0 ? task.timeElapsedSum : 0}</td>
+                  <td className="border border-gray-300 px-4 py-2 text-center">{task.timeLeftSum > 0 ? task.timeLeftSum : 0}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {taskDetails.length === 0 && <p className='text-red-500 my-2 text-center w-full flex flex-row justify-center items-center'>No Records Found!</p>}
         </section>
       </main>
     </div>

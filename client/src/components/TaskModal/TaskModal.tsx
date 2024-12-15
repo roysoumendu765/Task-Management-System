@@ -57,7 +57,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ userinfo, type, task, onClose, on
     try {
       let response;
       if (type === 'ADDUSER') {
-        response = await axios.post(`http://localhost:5000/taskmate/addtask`, userdata);
+        response = await axios.post(`https://task-management-app-backend-8814.onrender.com/taskmate/addtask`, userdata);
       } else if (type === 'UPDATEUSER') {
         if (!task?.taskId) {
           Swal.fire({
@@ -69,7 +69,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ userinfo, type, task, onClose, on
         }
   
         response = await axios.put(
-          `http://localhost:5000/taskmate/edittask/${task.taskId}`,
+          `https://task-management-app-backend-8814.onrender.com/taskmate/edittask/${task.taskId}`,
           userdata
         );
       }

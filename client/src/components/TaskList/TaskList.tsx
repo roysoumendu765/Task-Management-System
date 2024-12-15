@@ -35,7 +35,7 @@ const TaskList: React.FC = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/taskmate/getalltasks/${username}`);
+        const response = await axios.get(`https://task-management-app-backend-8814.onrender.com/taskmate/getalltasks/${username}`);
 
         if (response.status === 200) {
           setTasks(response.data.result);
@@ -233,7 +233,7 @@ const TaskList: React.FC = () => {
             ))}
           </tbody>
         </table>
-
+        {displayedTasks.length === 0 && <p className='text-red-500 my-2 text-center w-full flex flex-row justify-center items-center'>No Records Found!</p>}
         {(isEditModalOpen) && (
           <TaskModal
             userinfo={useremail}
