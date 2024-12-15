@@ -28,3 +28,6 @@ Task Management System, supporting realtime task management and sorting tasks ba
 10. Create endpoints as you deem necessary based on the app requirements
 11. Users should be able to do CRUD on their tasks and not on tasks of other users (hence authentication is required both on front end and back end)
 12. Create endpoints to dynamically calculate the statistics required for dashboard page. Fetching all data on front end and then doing data manipulation on front end is not advisable (all required calculations should be done by backend)
+
+# Backend: `https://task-management-app-backend-8814.onrender.com/`
+# Frontend: `https://inspiring-pithivier-1d27ac.netlify.app/`
